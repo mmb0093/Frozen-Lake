@@ -48,32 +48,25 @@ if __name__ == '__main__':
     env.seed(0)
     numero_jugadas = 100
     numero_pasos = 20
-    inicio = time.time()
     policy_pop = [generar_jugada_aleatoria() for _ in range(numero_jugadas)]
     for idx in range(numero_pasos):
         puntuación_jugadas = [evaluar_jugada(env, p) for p in policy_pop]
-        print('Generación %d : mejor puntuación = %0.2f' %(idx+1, max(puntuación_jugadas)))
-        #Se ordenal las jugadas de peores a mejores
-        ranking_peores_jugadas =  list (np.argsort(puntuación_jugadas))
-        #elitismo
+        print('Generación %d : mejor puntuación = %0.2f' % (idx + 1, max(puntuación_jugadas)))
+        # Se ordenal las jugadas de peores a mejores
+        ranking_peores_jugadas = list(np.argsort(puntuación_jugadas))
+        # elitismo
         # Se ordenan las jugas de mejores puntuadas a peores.
         ranking_mejores_jugadas = list(reversed(np.argsort(puntuación_jugadas)))
-        #De entre las jugadas aleatorias de un episodio escogemos aquellas que son mejores
-        elite_set = [policy_pop[x] for x in ranking_mejores_jugadas[:0]]
+        # De entre las jugadas aleatorias de un episodio escogemos aquellas que son mejores
+        elite_set = [policy_pop[x] for x in ranking_mejores_jugadas[:20]]
         select_probs = np.array(puntuación_jugadas) / np.sum(puntuación_jugadas)
         child_set = [cruce(
             policy_pop[np.random.choice(range(numero_jugadas), p=select_probs)],
             policy_pop[np.random.choice(range(numero_jugadas), p=select_probs)])
-            for _ in range(numero_jugadas - 0)]
+            for _ in range(numero_jugadas - 20)]
         mutated_list = [mutacion(p) for p in child_set]
         policy_pop = elite_set
         policy_pop += mutated_list
     policy_score = [evaluar_jugada(env, p) for p in policy_pop]
-    best_policy = policy_pop[np.argmax(policy_score)]
-
-    fin = time.time()
-    print('Mejor jugada = %0.2f. Tiempo transcurrido = %4.4f'
-            %(np.max(puntuación_jugadas), (fin-inicio)))
-
 
     env.close()
