@@ -5,8 +5,29 @@ import time
 import gym
 from gym import wrappers
 
+#número de episodios
+eps = 100
+
+#Tamaño del tablero del juego
+tam = 16
+
+#Mutabilidad
+mut = 0.025
+
+#Número de acciones (u,d,l,r)
+act = 4
+
+#Cruce
+crx = 0.7
+
+#Número de generaciones
+ngen = 20
+
+#Número de jugadas
+njds = 100
+
 #Arrancar un episodio
-def run_episode(env, jugada, episodios=100):
+def run_episode(env, jugada, episodios=eps):
     puntuacion_total = 0
     obs = env.reset()
     for t in range(episodios):
@@ -18,10 +39,10 @@ def run_episode(env, jugada, episodios=100):
     return puntuacion_total
 #Generar jugada aleatoria
 def generar_jugada_aleatoria():
-    return np.random.choice(4, size=((16)))
+    return np.random.choice(act, size=((tam)))
 
 #Evaluación
-def evaluar_jugada(env, jugada, episodios=100):
+def evaluar_jugada(env, jugada, episodios=eps):
     puntuacion_total = 0.0
     for _ in range(episodios):
         puntuacion_total += run_episode(env, jugada)
@@ -30,26 +51,26 @@ def evaluar_jugada(env, jugada, episodios=100):
 #Cruce
 def cruce(jugada1, jugada2):
     nueva_jugada = jugada1.copy()
-    for i in range(16):
+    for i in range(tam):
         rand = np.random.uniform()
-        if rand > 0.8:
+        if rand > crx:
             nueva_jugada[i] = jugada2[i]
     return nueva_jugada
 
 #Mutación
-def mutacion(jugada, p=0.1):
+def mutacion(jugada, p=mut):
     nueva_jugada = jugada.copy()
-    for i in range(16):
+    for i in range(tam):
         rand = np.random.uniform()
         if rand < p:
-            nueva_jugada[i] = np.random.choice(4)
+            nueva_jugada[i] = np.random.choice(act)
     return nueva_jugada
 
 if __name__ == '__main__':
     env = gym.make('FrozenLake-v0')
     env.seed(0)
-    numero_jugadas = 100
-    generaciones = 20
+    numero_jugadas = njds
+    generaciones = ngen
     puntuacion = []
     #Generamos las jugadas
     generar_jugadas = [generar_jugada_aleatoria() for _ in range(numero_jugadas)]
@@ -60,17 +81,16 @@ if __name__ == '__main__':
         #Elitismo
 
 
+        probabilidad_seleccion = np.array(puntuación_jugadas) / np.sum(puntuación_jugadas)
 
-        #Calculamos la probabilidad de cruce
-        select_probs = np.array(puntuación_jugadas) / np.sum(puntuación_jugadas)
 
         #Se genera la descendencia mediante el cruce de 2 individuos.
         child_set = [cruce(
-            generar_jugadas[np.random.choice(range(numero_jugadas), p=select_probs)],
-            generar_jugadas[np.random.choice(range(numero_jugadas), p=select_probs)])
-            for _ in range(numero_jugadas - 20)]
-        # Seleccion
+            generar_jugadas[np.random.choice(range(numero_jugadas), p=probabilidad_seleccion)],
+            generar_jugadas[np.random.choice(range(numero_jugadas), p=probabilidad_seleccion)])
+            for _ in range(numero_jugadas -10 )]
 
+        # Seleccion
 
         # Se ordenan las jugadas de mejores puntuadas a peores.
         ranking_mejores_jugadas = list(reversed(np.argsort(puntuación_jugadas)))
@@ -78,19 +98,22 @@ if __name__ == '__main__':
         # De entre las jugadas de la generación actual escogemos aquellas que son mejores
         elite_set = [generar_jugadas[x] for x in ranking_mejores_jugadas[:10]]
 
-        # Se ordenal las jugadas de peores a mejores y eliminamos los 5 primeros índices
-        lista_indices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-        descendientes_sin_peores = np.delete(lista_indices, list(np.argsort(child_set)))
 
+        #Mutamos
+        mutated_list = [mutacion(p) for p in child_set]
 
-        mutated_list = [mutacion(p) for p in descendientes_sin_peores]
+        #Sumamos la lista de mutaciones a los mejores individuaos de la generación anterior
         generar_jugadas = elite_set
         generar_jugadas += mutated_list
+
 
     puntuación_jugada = [evaluar_jugada(env, p) for p in generar_jugadas]
 
     #Representación
     plt.plot(puntuacion)
+    plt.ylabel("Fitness")  # Inserta el título del eje X
+    plt.xlabel("Generación")  # Inserta el título del eje Y
+    plt.title("Aprendizaje")
     plt.show()
 
 
