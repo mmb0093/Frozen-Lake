@@ -18,7 +18,7 @@ mut = 0.025
 act = 4
 
 #Cruce
-crx = 0.7
+crx = 0.6
 
 #Número de generaciones
 ngen = 20
@@ -98,13 +98,15 @@ if __name__ == '__main__':
         # De entre las jugadas de la generación actual escogemos aquellas que son mejores
         elite_set = [generar_jugadas[x] for x in ranking_mejores_jugadas[:10]]
 
-
         #Mutamos
         mutated_list = [mutacion(p) for p in child_set]
+
+
 
         #Sumamos la lista de mutaciones a los mejores individuaos de la generación anterior
         generar_jugadas = elite_set
         generar_jugadas += mutated_list
+
 
 
     puntuación_jugada = [evaluar_jugada(env, p) for p in generar_jugadas]
