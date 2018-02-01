@@ -35,6 +35,9 @@ def run_episode(env, jugada, episodios=eps):
     puntuacion_total = 0
     obs = env.reset()
     for t in range(episodios):
+        # La siguiente línea de código permite que en la ejecución se vean las jugadas con tablero
+        #Hay que tener cuidado porque si se sobrecarga el algoritmo se verá afectado el tiempo de ejecución
+        #env.render()
         accion = jugada[obs]
         obs, puntuacion, done, _ = env.step(accion)
         puntuacion_total += puntuacion
