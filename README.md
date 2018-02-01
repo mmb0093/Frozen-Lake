@@ -60,7 +60,7 @@ Los parámetros que vamos a emplear para ajustar el algoritmo:
 
 ### Evaluación
 
-Esta función la vamos a emplear para evaluar las jugadas que se van a ir reslizando:
+Esta función la vamos a emplear para evaluar las jugadas que se van a ir realizando:
 
 	    def evaluar_jugada(env, jugada, episodios=eps):
 		puntuacion_total = 0.0
@@ -292,7 +292,9 @@ La configuración que va a quedar es esta:
 
 El resultado gráfico es este:
 
-![Configuración final](https://github.com/mmb0093/Frozen-Lake/blob/master/img/final.png)Vemos que el aprendizaje se suaviza al principio (debido al elitismo) y que aprende igual de bien que las anteriores pruebas en menos tiempo de ejecución.
+![Configuración final](https://github.com/mmb0093/Frozen-Lake/blob/master/img/final.png)
+
+Vemos que el aprendizaje se suaviza al principio (debido al elitismo) y que aprende igual de bien que las anteriores pruebas en menos tiempo de ejecución.
 
 Aun con todo esto yo bajaría el número de generaciones, no creo que hagan falta tantas (quizá 30 sean suficientes).
 
