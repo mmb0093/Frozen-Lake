@@ -21,10 +21,14 @@ act = 4
 crx = 0.6
 
 #Número de generaciones
-ngen = 20
+ngen = 100
 
 #Número de jugadas
 njds = 100
+
+#Elitismo. de todas las jugadas, nos quedamos con algunas de las mejores
+#Hay que tener especial cuidado en que este número no supere el número de jugadas
+elit = 50
 
 #Arrancar un episodio
 def run_episode(env, jugada, episodios=eps):
@@ -88,7 +92,7 @@ if __name__ == '__main__':
         child_set = [cruce(
             generar_jugadas[np.random.choice(range(numero_jugadas), p=probabilidad_seleccion)],
             generar_jugadas[np.random.choice(range(numero_jugadas), p=probabilidad_seleccion)])
-            for _ in range(numero_jugadas -10 )]
+            for _ in range(numero_jugadas -elit )]
 
         # Seleccion
 
@@ -96,7 +100,7 @@ if __name__ == '__main__':
         ranking_mejores_jugadas = list(reversed(np.argsort(puntuación_jugadas)))
 
         # De entre las jugadas de la generación actual escogemos aquellas que son mejores
-        elite_set = [generar_jugadas[x] for x in ranking_mejores_jugadas[:10]]
+        elite_set = [generar_jugadas[x] for x in ranking_mejores_jugadas[:elit]]
 
         #Mutamos
         mutated_list = [mutacion(p) for p in child_set]
