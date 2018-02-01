@@ -12,23 +12,23 @@ eps = 100
 tam = 16
 
 #Mutabilidad
-mut = 0.025
+mut = 0.06
 
 #Número de acciones (u,d,l,r)
 act = 4
 
 #Cruce
-crx = 0.6
+crx = 0.75
 
 #Número de generaciones
-ngen = 50
+ngen = 40
 
 #Número de jugadas
 njds = 100
 
 #Elitismo. de todas las jugadas, nos quedamos con algunas de las mejores
 #Hay que tener especial cuidado en que este número no supere el número de jugadas
-elit = 50
+elit = 15
 
 #Arrancar un episodio
 def run_episode(env, jugada, episodios=eps):
