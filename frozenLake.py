@@ -21,7 +21,7 @@ act = 4
 crx = 0.6
 
 #Número de generaciones
-ngen = 100
+ngen = 50
 
 #Número de jugadas
 njds = 100
