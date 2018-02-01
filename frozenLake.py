@@ -81,23 +81,26 @@ if __name__ == '__main__':
     puntuacion = []
     #Generamos las jugadas
     generar_jugadas = [generar_jugada_aleatoria() for _ in range(numero_jugadas)]
+    #Recorremos generación a generación
     for idx in range(generaciones):
+        #Evaluamos todas las jugadas y guardamos su fitness
         puntuación_jugadas = [evaluar_jugada(env, p) for p in generar_jugadas]
+        #El siguiente print se mostrará en la ejecución y nos va a ir mostrando la puntuación por generación
         print('Generación %d : mejor puntuación = %0.2f' % (idx + 1, max(puntuación_jugadas)))
         puntuacion.append(max(puntuación_jugadas))
         #Elitismo
 
-
+        #Vamos a establecer una probabilidad de cruce para la generación de la descendencia
+        #En que mejor sea la jugada, mayor será dicha probabilidad
         probabilidad_seleccion = np.array(puntuación_jugadas) / np.sum(puntuación_jugadas)
 
 
-        #Se genera la descendencia mediante el cruce de 2 individuos.
+        #Se genera la descendencia mediante el cruce de 2 individuos y se establece la probabilidad
         child_set = [cruce(
             generar_jugadas[np.random.choice(range(numero_jugadas), p=probabilidad_seleccion)],
             generar_jugadas[np.random.choice(range(numero_jugadas), p=probabilidad_seleccion)])
             for _ in range(numero_jugadas -elit )]
 
-        # Seleccion
 
         # Se ordenan las jugadas de mejores puntuadas a peores.
         ranking_mejores_jugadas = list(reversed(np.argsort(puntuación_jugadas)))
@@ -115,7 +118,7 @@ if __name__ == '__main__':
         generar_jugadas += mutated_list
 
 
-
+    #Evaluamos para obtener la puntuación de la jugada
     puntuación_jugada = [evaluar_jugada(env, p) for p in generar_jugadas]
 
     #Representación
