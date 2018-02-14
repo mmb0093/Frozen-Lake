@@ -20,11 +20,11 @@ Puedes directamente clonarlo desde el propio repositorio o desde consola:
 	
 ## Descripción del juego
 
-Es un juego para un solo jugador en el que hat que llegar desde la casilla de salida a la casilla objetivo, procurando no caer en ningún agujero. El resto de casillas son hielo.
+Es un juego para un solo jugador en el que hay que llegar desde la casilla de salida a la casilla objetivo, procurando no caer en ningún agujero. El resto de casillas son hielo.
 
 ![img](https://github.com/mmb0093/Frozen-Lake/blob/master/img/tablero.png)
 
-El tamaño del tablero va ha ser de 4x4, es decir, tiene 16 casillas.
+El tamaño del tablero va a ser de 4x4, es decir, tiene 16 casillas.
 
 Los posibles movimientos son 4:
   - Arriba (u)
@@ -60,7 +60,7 @@ Los parámetros que vamos a emplear para ajustar el algoritmo:
 
 ### Evaluación
 
-Esta función la vamos a emplear para evaluar las jugadas que se van a ir reslizando:
+Esta función la vamos a emplear para evaluar las jugadas que se van a ir realizando:
 
 	    def evaluar_jugada(env, jugada, episodios=eps):
 		puntuacion_total = 0.0
@@ -80,7 +80,7 @@ En la función de cruce recibimos dos jugadas y las cruzamos en función de porc
 			    nueva_jugada[i] = jugada2[i]
 		    return nueva_jugada
 		    
-devuelve la jugada producto del cruce.
+Devuelve la jugada producto del cruce.
 
 ### Mutación
 Le pasamos la jugada que queremos mutar y la probabilidad de mutación y en función de esta probabilidad se mutará la jugada o no.
@@ -129,17 +129,17 @@ La gráfica obtenida es la siguiente:
 
 ![Gráfica primer experimento](https://github.com/mmb0093/Frozen-Lake/blob/master/img/primeraprueba.png)
 
-Vamos que aprende ya que la gráfica es creciente pero no parece suficiente, es muy irregular.
+Vemos que aprende ya que la gráfica es creciente pero no parece suficiente, es muy irregular.
 
 Repasemos los parámetros de uno en uno:
 
-si subimos el número de episodios por generación, tendremos más probabilidades de encontrarnos con mejores soluciones, podemos subirlo a 150.
+Si subimos el número de episodios por generación, tendremos más probabilidad de encontrarnos con mejores soluciones, podemos subirlo a 150.
 
 El tamaño del tablero no nos compete por ahora, ni tampoco el número de acciones.
 
-La mutabilidad es muy baja y de momento me interesa tenerla así, así que no la voy a modificar, lo mismo para el cruce.
+La mutabilidad es muy baja y de momento interesa tenerla así, así que no la voy a modificar, lo mismo para el cruce.
 
-El número de generaciones sí que me interesa elevarlo, creo que estaría mejor si lo doblo a 100.
+El número de generaciones sí que interesa elevarlo, creo que estaría mejor si lo doblo a 100.
 
 También voy a subir el número de jugadas por generación a 150.
 
@@ -147,7 +147,7 @@ El elitismo es muy alto, lo voy a bajar a 10, porque nos vamos a quedar con las 
 
 ### Configuración 2
 
-Dadas las anteriores conclusiones, la configuración se va ha ver así:
+Dadas las anteriores conclusiones, la configuración se va a ver así:
 		
 		#número de episodios
 		eps = 150
@@ -172,11 +172,11 @@ Dadas las anteriores conclusiones, la configuración se va ha ver así:
 
 		#Elitismo. 
 		elit = 10
-Según lo estoy ejecutando, puedo ya darme cuenta de que el tiempo de procesamiento se me va de las manos. Es probable que lo haya sobrecargado al aumentar los episodios por jugada, las jugadas por generación y evidentemente, haber metido tantas generaciones.
+Según lo estoy ejecutando, puedo ya darme cuenta de que el tiempo de procesamiento se va de las manos. Es probable que lo haya sobrecargado al aumentar los episodios por jugada, las jugadas por generación y evidentemente, haber metido tantas generaciones.
 
 ![Segundo experimento](https://github.com/mmb0093/Frozen-Lake/blob/master/img/segundaprueba.png)
 
-Aprende demasiado rápido y hago incido en la palabra *demasiado*. Esto implica que lo estamos forzando mucho. Está claro que aunque aprenda muy rápido, l0s 15 minutos que ha tardado en ejecutarse son intolerables (en comparación con otras pruebas hechas sobre el mismo algoritmo, el cual en menos de un minuto lo suele tener).
+Aprende demasiado rápido y hago inciso en la palabra *demasiado*. Esto implica que lo estamos forzando mucho. Está claro que aunque aprenda muy rápido, los 15 minutos que ha tardado en ejecutarse son intolerables (en comparación con otras pruebas hechas sobre el mismo algoritmo, el cual en menos de un minuto lo suele tener).
 
 Para evitar esta situación de nuevo voy a dejar el número de jugadas y el de episodios como al principio y voy a bajar el número de generaciones a 40.
 
@@ -211,7 +211,7 @@ Configuramos de nuevo:
 		#Elitismo. 
 		elit = 10
 		
-Nuevamente, mientras estoy ejecutando veo que vuelve la fluided, entonces podemos concluir que el problema del tiempo y la sobrecarga estaba donde pensaba.
+Nuevamente, mientras estoy ejecutando veo que vuelve la fluided, entonces podemos concluir que el problema del tiempo y la sobrecarga estaba donde se pensaba.
 
 ![Tercera prueba](https://github.com/mmb0093/Frozen-Lake/blob/master/img/terceraprueba.png)
 
@@ -219,7 +219,7 @@ Ya vemos que llega a soluciones igual de buenas y hemos reducido tiempos sin que
 
 Esta solución me parece perfectamente factible, pero para que no se quede ningún parámetro por tocar y para dar algún matiz vamos a modificar lo siguiente:
 
-Voy a subir la mutabilidad, no mucho, pero le vamos a dejar en 0.06.
+Voy a subir la mutabilidad, no mucho, pero la vamos a dejar en 0.06.
 
 Lo otro con lo que quiero jugar es con el elitismo, lo voy a dejar a 0.
 
@@ -252,11 +252,11 @@ La cuarta configuración se va a ver así:
 		#Elitismo.
 		elit = 0
 		
-Mientras va ejecutando puedo afirmar que la velocidad es la misma que la vez anterior, de hecho, quizá un poco más rápida debido a que estoy sin elitismo.
+Mientras va ejecutando puedo afirmar que la velocidad es la misma que la anterior, de hecho, quizá un poco más rápida debido a que está sin elitismo.
 
 ![Cuarta prueba](https://github.com/mmb0093/Frozen-Lake/blob/master/img/pruebacuarta.png)
 
-Podemos observar que ha perdido homogeneidad, sobretodo al principio de la curva de aprendizaje y es bastante evidente porqué, el elitismo (en bajas dósis) beneficia al aprendizaje ya que gusrdas buenas soluciones sin impedir que se generen nuevas.
+Podemos observar que ha perdido homogeneidad, sobre todo al principio de la curva de aprendizaje y es bastante evidente porque el elitismo (en bajas dósis) beneficia al aprendizaje ya que guarda buenas soluciones sin impedir que se generen nuevas.
 Aun así el resultado final de aprendizaje es muy similar.
 
 Voy a repetir el mismo experimento con la misma configuración, pero esta vez, voy a subir el eliismo a 15, a ver que pasa
@@ -292,7 +292,9 @@ La configuración que va a quedar es esta:
 
 El resultado gráfico es este:
 
-![Configuración final](https://github.com/mmb0093/Frozen-Lake/blob/master/img/final.png)Vemos que el aprendizaje se suaviza al principio (debido al elitismo) y que aprende igual de bien que las anteriores pruebas en menos tiempo de ejecución.
+![Configuración final](https://github.com/mmb0093/Frozen-Lake/blob/master/img/final.png)
+
+Vemos que el aprendizaje se suaviza al principio (debido al elitismo) y que aprende igual de bien que las anteriores pruebas en menos tiempo de ejecución.
 
 Aun con todo esto yo bajaría el número de generaciones, no creo que hagan falta tantas (quizá 30 sean suficientes).
 
@@ -308,11 +310,11 @@ Obviamente hay muchas más, aun que no es estrítamente necesario, recomiento us
 
 ## Conclusiones
 
-Hemos visto el potencial de lo que Gym, nos puede ofrecer, hay librerías que implementan más juegos y más modelos, (aunque dan bastantes problemas dependiendo del SO que estés usando), pero en concreto este juego y el Cart Pole, son los mejores para hacer ejemplos porque no tienen dependencia externas.
+Hemos visto el potencial de lo que Gym nos puede ofrecer, hay librerías que implementan más juegos y más modelos (aunque dan bastantes problemas dependiendo del OS que estés usando), pero en concreto este juego y el Cart Pole, son los mejores para hacer ejemplos porque no tienen dependencia externas.
 
 A la hora de ajustar un algoritmo para una solución en concreto hemos de ser conscientes de que las soluciones no van a ser genéricas, dependen de lo que se esté intentando resolver y los parámetros usados son totalmente experimentales, no hay "normas" para escoger de manera crítica más allá de la observación y el sentido común.
 
-Otro factor a tener en cuenta es como vamos a premiar o a castigar una solución en función de su adaptación. Saber encontrar el equilibrio entre "zanahorias" y "latigazos" es importante. En ente caso, el algoritmo presentado "premia" en función de la adaptación de cada individuo.
+Otro factor a tener en cuenta es cómo vamos a premiar o castigar una solución en función de su adaptación. Saber encontrar el equilibrio entre "zanahorias" y "latigazos" es importante. En ente caso, el algoritmo presentado "premia" en función de la adaptación de cada individuo.
 
 El elitismo es otro punto crítico. En el algoritmo que usamos, el elitismo se queda con las mejores soluciones pero hay más formas, de hecho, una buena propuesta sería quedarse con los mejores de la solución antigua y sustituir los que tengan peor adaptación en la descendencia (quizá sea muy elitista, pero se puede hacer).
 
