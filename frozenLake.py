@@ -1,9 +1,13 @@
+#Práctica 06 de Computación Neuronal y Evolutiva
+#Alumnos: Marta Monje Blanco e Iván Iglesias Cuesta.
+
 import numpy as np
 import matplotlib.pyplot as plt
 import random
 import time
 import gym
 from gym import wrappers
+
 
 #número de episodios
 eps = 100
@@ -28,7 +32,8 @@ njds = 100
 
 #Elitismo. de todas las jugadas, nos quedamos con algunas de las mejores
 #Hay que tener especial cuidado en que este número no supere el número de jugadas
-elit = 15
+elit = 10
+
 
 #Arrancar un episodio
 def run_episode(env, jugada, episodios=eps):
@@ -44,6 +49,7 @@ def run_episode(env, jugada, episodios=eps):
         if done:
             break
     return puntuacion_total
+
 #Generar jugada aleatoria
 def generar_jugada_aleatoria():
     return np.random.choice(act, size=((tam)))
@@ -110,8 +116,6 @@ if __name__ == '__main__':
 
         #Mutamos
         mutated_list = [mutacion(p) for p in child_set]
-
-
 
         #Sumamos la lista de mutaciones a los mejores individuaos de la generación anterior
         generar_jugadas = elite_set
