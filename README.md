@@ -1,7 +1,7 @@
  
 ![n](https://github.com/mmb0093/Frozen-Lake/blob/master/img/logo_burgos.png)
 
-*Práctica perteneciente a la asignatura de Computación neuronal y Evolutiva, Universidad de Burgos*.
+*Práctica perteneciente a la asignatura de Computación neuronal y Evolutiva, Grado en Informática, Universidad de Burgos*.
 
 ***Alumnos:** Marta Monje Blanco e Iván Iglesias Cuesta.*
 
