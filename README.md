@@ -1,3 +1,10 @@
+ 
+![n](https://github.com/mmb0093/Frozen-Lake/blob/master/img/logo_burgos.png)
+
+*Práctica perteneciente a la asignatura de Computación neuronal y Evolutiva, Universidad de Burgos*.
+
+***Alumnos:** Marta Monje Blanco e Iván Iglesias Cuesta.*
+
 # Algoritmo genético para resolver Frozen Lake
 
 ![N](https://github.com/mmb0093/Frozen-Lake/blob/master/img/openai.png)
@@ -11,7 +18,6 @@ Dado que *Frozen lake* no tiene dependencias, se puede realizar (y se recomienda
 
 Se necesita tener una versión de Python 3.5 o superior. Yo he usado Python 3.6.3.
 
-## Conceptos y teoría
 ## Clona el repositorio
 
 Puedes directamente clonarlo desde el propio repositorio o desde consola:
